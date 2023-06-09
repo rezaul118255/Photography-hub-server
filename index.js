@@ -35,10 +35,10 @@ async function run() {
             const result = await ClassCollection.find().toArray();
             res.send(result)
         })
-        app.get(('/Instructors', async (req, res) => {
+        app.get('/Instructors', async (req, res) => {
             const result = await InstructorsCollection.find().toArray();
             res.send(result)
-        }))
+        })
 
 
         // Send a ping to confirm a successful connection
@@ -46,6 +46,7 @@ async function run() {
         console.log("Pinged your deployment. You successfully connected to MongoDB!");
     } finally {
         // Ensures that the client will close when you finish/error
+        // await client.close();
         // await client.close();
     }
 }
