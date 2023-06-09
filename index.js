@@ -31,6 +31,7 @@ async function run() {
         await client.connect();
         const ClassCollection = client.db("RestuDb").collection("Class");
         const InstructorsCollection = client.db("RestuDb").collection("Instructors");
+        const CartCollection = client.db("RestuDb").collection("Carts");
         app.get('/Class', async (req, res) => {
             const result = await ClassCollection.find().toArray();
             res.send(result)
@@ -39,6 +40,21 @@ async function run() {
             const result = await InstructorsCollection.find().toArray();
             res.send(result)
         })
+        // app.get('/Carts', async (req, res) => {
+        //     const result = await InstructorsCollection.find().toArray();
+        //     res.send(result)
+        // })
+
+
+
+        // cart collection
+        app.post('/Carts', async (req, res) => {
+            const item = req.body;
+            console.log(item);
+            const result = await CartCollection.insertOne(item);
+            res.send(result);
+        })
+
 
 
         // Send a ping to confirm a successful connection
