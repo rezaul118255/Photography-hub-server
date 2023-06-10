@@ -29,13 +29,28 @@ async function run() {
     try {
         // Connect the client to the server	(optional starting in v4.7)
         await client.connect();
+        const UsersCollection = client.db("RestuDb").collection("users");
         const ClassCollection = client.db("RestuDb").collection("Class");
         const InstructorsCollection = client.db("RestuDb").collection("Instructors");
         const CartCollection = client.db("RestuDb").collection("Carts");
+        // user related apis 
+        app.post('/users', async (req, res) => {
+            const user = req.body;
+            console.log(user);
+            const result = await UsersCollection.insertOne(user);
+            res.send(result);
+        })
+
+
+        //  Class related apis
         app.get('/Class', async (req, res) => {
             const result = await ClassCollection.find().toArray();
             res.send(result)
         })
+
+
+
+        // Instructors related apis
         app.get('/Instructors', async (req, res) => {
             const result = await InstructorsCollection.find().toArray();
             res.send(result)
